@@ -103,6 +103,17 @@ document.getElementById('minli').innerHTML=`<div class="hero"><strong>${stems[ds
 
 function copyResult(){let r=document.getElementById('result').innerText+'\n'+document.getElementById('reading').innerText+'\n'+document.getElementById('minli').innerText;navigator.clipboard?.writeText(r).then(()=>alert('Скопировано')).catch(()=>prompt('Скопируйте:',r))||prompt('Скопируйте:',r)}
 try{let p=new URLSearchParams(location.hash.slice(1));for(let k of ['date','time','tz','lon','mode','boundary'])if(p.has(k))document.getElementById(k).value=p.get(k)}catch(e){}
-setupZones();
-calculate();
+function initializeCalculator(){
+  try {
+    setupZones();
+    calculate();
+    const countryCount=document.getElementById('country').options.length;
+    if(!countryCount)throw new Error('Список стран пуст после инициализации');
+  } catch(e) {
+    console.error('Ba Zi initialization failed:',e);
+    document.getElementById('tzstatus').textContent='Ошибка загрузки справочников: '+e.message+' — обновите страницу Ctrl+F5.';
+  }
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializeCalculator,{once:true});
+else initializeCalculator();
 </script></html>
