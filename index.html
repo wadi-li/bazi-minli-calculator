@@ -102,7 +102,7 @@ document.getElementById('minli').innerHTML=`<div class="hero"><strong>${stems[ds
 }
 
 function copyResult(){let r=document.getElementById('result').innerText+'\n'+document.getElementById('reading').innerText+'\n'+document.getElementById('minli').innerText;navigator.clipboard?.writeText(r).then(()=>alert('Скопировано')).catch(()=>prompt('Скопируйте:',r))||prompt('Скопируйте:',r)}
-try{let p=new URLSearchParams(location.hash.slice(1));for(let k of ['date','time','tz','lon','mode','boundary'])if(p.has(k))document.getElementById(k).value=p.get(k)}catch(e){}calculate();
-
+try{let p=new URLSearchParams(location.hash.slice(1));for(let k of ['date','time','tz','lon','mode','boundary'])if(p.has(k))document.getElementById(k).value=p.get(k)}catch(e){}
 setupZones();
+calculate();
 </script></html>
